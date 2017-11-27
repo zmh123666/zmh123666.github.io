@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://oneimg.oss-cn-hangzhou.aliyuncs.com/xu01_test/20171127/1511767808515.png">
 <meta property="og:image" content="http://oneimg.oss-cn-hangzhou.aliyuncs.com/xu01_test/20171127/1511768044005.png">
 <meta property="og:image" content="http://oneimg.oss-cn-hangzhou.aliyuncs.com/xu01_test/20171127/1511768159596.png">
-<meta property="og:updated_time" content="2017-11-27T07:43:13.486Z">
+<meta property="og:updated_time" content="2017-11-27T07:59:48.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="xdebug在lnmp中的配置">
 <meta name="twitter:description" content="在我使用过的工具中，PHP的调试工具Xdebug具有着看似配置简单，实则全是玄学的特点。尽管互联网上关于Xdebug的配置都有着详尽的说明，不过各种眉眉角角真的非常折腾人，各种说明之间相互补充又各有矛盾之处。如果是本地wamp的简单环境配置相信不会太困难，本文主要针对vagrant+虚拟机下的lnmp环境的配置加以说明。 1.下载&amp;amp;编译 欸，下载要说明么。我觉得唯一需要注意的点就是要对应P">
@@ -337,19 +337,7 @@
 <p>欸，下载要说明么。我觉得唯一需要注意的点就是要对应PHP 的版本。<br>官网教程：<a href="https://xdebug.org/docs/install" target="_blank" rel="external">https://xdebug.org/docs/install</a></p>
 <p>wget 所需安装包并解压，进入xdebug目录进行<br><code>/usr/local/php/bin/phpize  &amp;&amp; ./configure --with-php-config=/usr/local/php/bin/php-co nfig &amp;&amp; make &amp;&amp; make install</code> 编译三连</p>
 <p>2.php配置<br>找到有效的php.ini，增加以下配置<br><code>zend_extension=&quot;/usr/local/php/modules/xdebug.so&quot;</code><br>这个时候phpinfo之中应该就已经有了xdebug 的支持。但仍需要更详细的配置。</p>
-<p><code>xdebug.auto_trace=1
-xdebug.collect_params=1
-xdebug.collect_return=1
-xdebug.trace_output_dir=&quot;/tmp/xdebug/trace&quot;
-xdebug.profiler_enable=1
-xdebug.profiler_output_dir=&quot;/tmp/xdebug/profiler&quot;
-xdebug.remote_enable=true
-xdebug.remote_host=10.0.2.15
-xdebug.remote_port=9003
-xdebug.remote_handler=dbgp
-xdebug.remote_connect_back=1
-xdebug.remote_autostart=1
-xdebug.idekey=PHPSTORM</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">xdebug.auto_trace=1</div><div class="line">xdebug.collect_params=1</div><div class="line">xdebug.collect_return=1</div><div class="line">xdebug.trace_output_dir="/tmp/xdebug/trace"</div><div class="line">xdebug.profiler_enable=1</div><div class="line">xdebug.profiler_output_dir="/tmp/xdebug/profiler"</div><div class="line">xdebug.remote_enable=true</div><div class="line">xdebug.remote_host=10.0.2.15</div><div class="line">xdebug.remote_port=9003</div><div class="line">xdebug.remote_handler=dbgp</div><div class="line">xdebug.remote_connect_back=1</div><div class="line">xdebug.remote_autostart=1</div><div class="line">xdebug.idekey=PHPSTORM</div></pre></td></tr></table></figure>
 <p>其中因人而异的是<code>remote_host</code>和<code>remote_port</code>。<strong>vagrant所配置的虚拟机与外界联系的ip地址一般是192开头的，而此处应该填写10开头的ip</strong><br>可通过<code>ifconfig</code>查看。<br>port则是自己与host机上的IDE约定好，一般为9000。<br>IDEKEY则根据你的IDE或者调试工具进行配置。</p>
 <p>3.PHPSTORM配置<br>PHPSTORM在xdbeug的支持上非常优秀，配置上有些眉角需要注意。<br><img src="http://oneimg.oss-cn-hangzhou.aliyuncs.com/xu01_test/20171127/1511766242215.png" alt="phpstorm setting"></p>
 <p> Xdebug配置选项中设置与php.ini中的端口号。<br> <img src="http://oneimg.oss-cn-hangzhou.aliyuncs.com/xu01_test/20171127/1511766541104.png" alt="server"></p>
